@@ -22,15 +22,36 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.myapplication.ui.theme.MyApplicationTheme
 
 @Composable
+fun HomeScreenRoute(
+    onOpenAttendance: () -> Unit = {},
+    onOpenGrades: () -> Unit = {},
+    onOpenIncidents: () -> Unit = {},
+    viewModel: HomeViewModel = viewModel()
+) {
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
+
+    HomeScreen(
+        state = state,
+        onOpenAttendance = onOpenAttendance,
+        onOpenGrades = onOpenGrades,
+        onOpenIncidents = onOpenIncidents
+    )
+}
+
+@Composable
 fun HomeScreen(
+    state: HomeViewModel.ScreenState = HomeViewModel.ScreenState(),
     onOpenAttendance: () -> Unit = {},
     onOpenGrades: () -> Unit = {},
     onOpenIncidents: () -> Unit = {}
@@ -60,7 +81,7 @@ fun HomeScreen(
                         horizontalAlignment = Alignment.Start
                     ) {
                         Text(
-                            text = "Alegri App",
+                            text = state.titleText,
                             style = MaterialTheme.typography.headlineMedium,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onBackground

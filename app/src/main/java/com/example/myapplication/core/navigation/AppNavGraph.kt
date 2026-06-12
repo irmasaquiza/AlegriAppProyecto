@@ -9,7 +9,7 @@ import androidx.navigation.navArgument
 import com.example.myapplication.presentation.attendance.AttendanceScreenRoute
 import com.example.myapplication.presentation.grades.GradeDetailScreen
 import com.example.myapplication.presentation.grades.GradesScreenRoute
-import com.example.myapplication.presentation.home.HomeScreen
+import com.example.myapplication.presentation.home.HomeScreenRoute
 import com.example.myapplication.presentation.incidents.IncidentScreenRoute
 import com.example.myapplication.presentation.login.LoginScreenRoute
 
@@ -33,7 +33,7 @@ fun AppNavGraph() {
         }
 
         composable(AppRoutes.Home) {
-            HomeScreen(
+            HomeScreenRoute(
                 onOpenAttendance = { navController.navigate(AppRoutes.Attendance) },
                 onOpenGrades = { navController.navigate(AppRoutes.Grades) },
                 onOpenIncidents = { navController.navigate(AppRoutes.Incidents) }
